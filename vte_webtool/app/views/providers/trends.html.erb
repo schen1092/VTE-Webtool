@@ -1,0 +1,11 @@
+<h1>Trends</h1>
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+<div class="text-center">
+  <h4>Individual and Cohort VTE Prophylaxis Compliance</h4>
+
+  <%= line_chart [
+    {name: "You", data: calculate_provider_monthspan_compliance},
+    {name: "Cohort", data: calculate_cohort_monthspan_compliance}],
+    {library: {hAxis: {title: "month"}, vAxis: {title: "% Cumulative Compliance", ticks: [0, 20,40,60,80,100]}, :hAxis=>{:format=>'MMM y'}}, min: 0, max: 105}
+      %>
+</div>

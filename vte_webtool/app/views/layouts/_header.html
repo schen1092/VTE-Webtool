@@ -1,0 +1,40 @@
+<header class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class = "navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          <!--<a class="navbar-brand"><%= @provider.ORDERING_PROVIDER %></a>-->
+          <a class="navbar-brand">House, Gregory</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right" data-toggle="collapse" data-target=".navbar-collapse">
+      <li><%= link_to "Log Out",   root_path %></li>
+      <% if @title == "Overview" %>
+        <li class = "active"><%= link_to "Overview",   provider_path(@provider) %></li>
+        <li><%= link_to "Ranking",  ranking_provider_path(@provider) %></li>
+        <li><%= link_to "Trends",   trends_provider_path(@provider) %></li>
+        <li><%= link_to "Compliance",   compliance_provider_path(@provider) %></li>
+      <% elsif @title == "Ranking" %>
+        <li><%= link_to "Overview",   provider_path(@provider) %></li>
+        <li class = "active"><%= link_to "Ranking",  ranking_provider_path(@provider) %></li>
+        <li><%= link_to "Trends",   trends_provider_path(@provider) %></li>
+        <li><%= link_to "Compliance",   compliance_provider_path(@provider) %></li>
+      <% elsif @title == "Trends" %>
+        <li><%= link_to "Overview",   provider_path(@provider) %></li>
+        <li><%= link_to "Ranking",  ranking_provider_path(@provider) %></li>
+        <li class = "active"><%= link_to "Trends",   trends_provider_path(@provider) %></li>
+        <li><%= link_to "Compliance",   compliance_provider_path(@provider) %></li>
+      <% else %>
+        <li><%= link_to "Overview",   provider_path(@provider) %></li>
+        <li><%= link_to "Ranking",  ranking_provider_path(@provider) %></li>
+        <li><%= link_to "Trends",   trends_provider_path(@provider) %></li>
+        <li class = "active"><%= link_to "Compliance",   compliance_provider_path(@provider) %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</header>

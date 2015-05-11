@@ -1,0 +1,44 @@
+<h1>Overview</h1>
+
+<div class="list-group">
+  <a href="#" class="list-group-item">
+      <h4 class="list-group-item-heading">Cumulative Ranking: <b><%= calculate_provider_ranking(@provider) %></b></h4>
+  </a>
+
+	<% comp = calculate_provider_monthly_compliance(@provider)[2] %>
+	<% if comp != 0 %>
+	  <% if comp >= 96 %>
+	  	<% classAttributes = "list-group-item list-group-item-success" %>
+		<% elsif comp >= 90 && comp < 96 %>
+			<% classAttributes = "list-group-item list-group-item-warning" %>
+		<% elsif comp < 90 %> 
+			<% classAttributes = "list-group-item list-group-item-danger" %>
+		<% end %>
+	  <a href="#" class="<%= classAttributes.html_safe %>">
+			<h4 class="list-group-item-heading"><%= Date::MONTHNAMES[1.month.ago.month] %> Compliance: <b><%= number_to_percentage(comp, precision: 1) %></b></h4>
+	  </a>
+  <% else %>
+		<a href="#" class="list-group-item">
+	      <h4 class="list-group-item-heading"> <%= Date::MONTHNAMES[1.month.ago.month] %> Compliance: <b>No data</b></h4>
+	  </a>
+  <% end %>
+
+
+  <% comp = calculate_provider_cumulative_compliance(@provider) %>
+	<% if comp != 0 %>
+	  <% if comp >= 96 %>
+	  	<% classAttributes = "list-group-item list-group-item-success" %>
+		<% elsif comp >= 90 && comp < 96 %>
+			<% classAttributes = "list-group-item list-group-item-warning" %>
+		<% elsif comp < 90 %> 
+			<% classAttributes = "list-group-item list-group-item-danger" %>
+		<% end %>
+	  <a href="#" class="<%= classAttributes.html_safe %>">
+	      <h4 class="list-group-item-heading">Cumulative Compliance: <b><%= number_to_percentage(comp, precision: 1) %></b></h4>
+	  </a>
+  <% else %>
+		<a href="#" class="list-group-item">
+	      <h4 class="list-group-item-heading">Cumulative Compliance: <b>No data</b></h4>
+	  </a>
+	<% end %>
+</div>

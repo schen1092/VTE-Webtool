@@ -1,0 +1,30 @@
+<h1>Compliance</h1>
+<h2>Only listing Non Compliant Order<h2>
+<table class="table table-striped table-bordered table-hover" style="text-align:center">
+  <tbody class="rowlink" data-link="row">
+    <tr>
+      <th style="text-align:center">Patient Name</th>
+      <th style="text-align:center">Patient ID</th>
+      <th style="text-align:center">Order Date</th>
+      <th style="text-align:center">Admission Date</th>
+      <th style="text-align:center">JHH Service</th>
+      <th style="text-align:center">CAT Name</th>
+      <th style="text-align:center">CAT_Code</th>
+      <th style="text-align:center">Compliance</th>
+    </tr>
+    <% @provider.orders.each do |order| %>
+    <tr>
+    <% if !order.MEDICATION_COMPLIANCE.eql?("YES") %>
+      <td><%= order.PATIENT_NAME %></td>
+      <td><%= order.HISTORY_NO %></td>
+      <td><%= order.ORD_DT %></td>
+      <td><%= order.ADMISSION_DATE %></td>
+      <td><%= order.JHH_SERVICE %></td>
+      <td><%= order.CAT_NAME %></td>
+      <td><%= order.CAT_CODE %></td>
+      <td><%= order.MEDICATION_COMPLIANCE %></td>
+    <% end %>  
+    </tr>
+    <% end %>
+  </tbody>
+</table>

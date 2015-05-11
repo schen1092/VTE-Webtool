@@ -1,0 +1,72 @@
+<h1>Rankings</h1>
+<div class="table-responsive" style="text-align: center;">
+            <table class="table table-striped table-bordered table-hover">
+              <tbody class="rowlink" data-link="row">
+                <tr>
+                  <th rowspan="2" style="text-align:center">Rank</th>
+                  <th colspan="3" style="text-align:center"><%= Date::MONTHNAMES[1.month.ago.month] + " " + 1.month.ago.year.to_s %></th>
+                  <th colspan="3" style="text-align:center">July 2014 - <%= Date::MONTHNAMES[1.month.ago.month] + " " + 1.month.ago.year.to_s %></th>
+                </tr>
+                <tr>
+                  <th style="text-align:center"># of Compliant Orders</th>
+                  <th style="text-align:center"># of Orders</th>
+                  <th style="text-align:center">Compliance %</th>
+                  <th style="text-align:center"># of Compliant Orders</th>
+                  <th style="text-align:center"># of Orders</th>
+                  <th style="text-align:center">Compliance %</th>
+                </tr>
+                
+                <% cumulativeCohort = calculate_cohort_cumulative_compliance %>
+                <% cumulativeCohort.each do |prov| %>
+                  <% if prov[4] >= 96 %>
+                    <% classAttributes = "success" %>
+                  <% elsif prov[4] < 96 && prov[4] >= 90 %>
+                    <% classAttributes = "warning" %>
+                  <% elsif prov[4] < 90 %>
+                    <% classAttributes = "danger" %>
+                  <% else %>
+                    <% classAttributes = "" %>
+                  <% end %>
+
+                  <% if prov[0] == @provider %>
+                    <tr data-link="<%= compliance_provider_path(@provider)%>">
+                      <th style="text-align:center"><font size="5"><%= prov[1] %></font></td> <!-- ranking-->
+                      <th style="text-align:center"><font size="5"><%= prov[2] %></font></td> <!-- number of compliant orders for month -->
+                      <th style="text-align:center"><font size="5"><%= prov[3] %></font></td> <!-- number of orders for month -->
+                      <th style="text-align:center" class = "<%= classAttributes.html_safe %>"><font size="5"><%= number_to_percentage(prov[4], precision: 1) %></font></td> <!-- monthly compliance -->
+                      <th style="text-align:center"><font size="5"><%= prov[5] %></font></td> <!-- number of compliant cumulative orders -->
+                      <th style="text-align:center"><font size="5"><%= prov[6] %></font></td> <!-- number of cumulative orders -->
+                      <% if prov[7] >= 96 %>
+                        <% classAttributes = "success" %>
+                      <% elsif prov[7] < 96 && prov[7] >= 90 %>
+                        <% classAttributes = "warning" %>
+                      <% elsif prov[7] < 90 %>
+                        <% classAttributes = "danger" %>
+                      <% else %>
+                        <% classAttributes = "" %>
+                      <% end %>
+                      <th style="text-align:center" class = "<%= classAttributes.html_safe %>"><font size="5"><%= number_to_percentage(prov[7], precision: 1) %></font></th> <!-- cumulative compliance -->
+                    </tr>
+                  <% else %>
+                    <tr>
+                      <td><%= prov[1] %></td> <!-- ranking-->
+                      <td><%= prov[2] %></td> <!-- number of compliant orders for month -->
+                      <td><%= prov[3] %></td> <!-- number of orders for month -->
+                      <td class = "<%= classAttributes.html_safe %>"><%= number_to_percentage(prov[4], precision: 1) %></td> <!-- monthly compliance -->
+                      <td><%= prov[5] %></td> <!-- number of compliant cumulative orders -->
+                      <td><%= prov[6] %></td> <!-- number of cumulative orders -->
+                      <% if prov[7] >= 96 %>
+                        <% classAttributes = "success" %>
+                      <% elsif prov[7] < 96 && prov[7] >= 90 %>
+                        <% classAttributes = "warning" %>
+                      <% elsif prov[7] < 90 %>
+                        <% classAttributes = "danger" %>
+                      <% else %>
+                        <% classAttributes = "" %>
+                      <% end %>
+                      <td class = "<%= classAttributes.html_safe %>"><%= number_to_percentage(prov[7], precision: 1) %></td> <!-- cumulative compliance -->
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>

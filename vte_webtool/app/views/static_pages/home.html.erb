@@ -1,0 +1,34 @@
+<div class="center jumbotron">
+  <h1>Welcome to the VTE Prophylaxis Compliance Tool</h1>
+
+<div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+
+              <tbody class="rowlink" data-link="row">
+                <tr>
+                  <th>Provider JHED ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                </tr>
+        <% i = 0 %>
+			  <% @providers.each do |provider| %>
+			    <tr>
+			      <td><%= link_to provider.ORDERING_PROV_JHED_ID, provider_path(provider) %></td>
+			      <td><%= provider.ORDERING_PROVIDER %></td>
+			      <td><%= provider.ORDERING_PROVIDER_ROLE %></td>
+			    </tr>
+			  <% end %>
+              </tbody>
+            </table>
+  </div>
+
+  <h2>Import Providers</h2>
+
+  <%= form_tag import_providers_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+</div>
+
+<%= link_to image_tag("rails.png", alt: "Rails logo"),
+            'http://rubyonrails.org/' %>
